@@ -1,5 +1,7 @@
 let canvas = document.querySelector('canvas')
 let ctx= canvas.getContext('2d');
+ctx.font = '45px Times New Roman';
+ctx.fillText("Cookie Crumble", 415,200);
 
 //variables that I will need throughout the game 
 let score;
@@ -10,11 +12,9 @@ let enemy;
 let gameSpeed;
 let keys = [];
 
-
-
 ctx.beginPath();
 ctx.fillStyle = 'yellow'
-ctx.fillRect(400,450,50,50);    // first two numbers represent where on the canvas the item will be when set to 10,10 they were in the upper left hand corner I had to move the to 400/450 pixles away from the 0 index (top left corner)
+ctx.fillRect(400,450,50,50); 
 ctx.stroke();
 
 ctx.beginPath();
@@ -22,15 +22,32 @@ ctx.fillStyle = 'blue';
 ctx.fillRect(10,400,80,100);
 ctx.stroke();
 
-function Start (){
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+let dx = 2 
+let dy = -2
+let x = 25
+let y = 25
 
-    cookieCount = 0
+ctx.fillStyle = 'yellow';
+
+function draw(); {
+    ctx.clearRect(0,0, canvas.width, canvas.height);
+    ctx.fillRect(x,y,50,50)
+
+    if( x + dx > canvas.width-1 || x + dx < 0){
+        dx = -dx;
+    } 
+    if(y + dy > canvas.height -1 || y + dy < 0){
+        dy = -dy;
+    }
+    x += dx;
+    y += dy;
 }
+setInterval(draw, 30);
 
-function makeMove(){
-ctx.clearRect(0,0, canvas.width, canvas.height);
-ctx.clearRect(0,0, canvas.width, canvas.height);
+   // cookieCount = 0
+//canvas.addEventListener('keypress' ,function(){
 
-}
+
+
+
+

@@ -1,0 +1,18 @@
+.sugar-rush {
+    text-align: center;
+    font-size: 75px;
+    color: yellowgreen;
+    border: solid;
+    border-color:violet;
+    background-color: lightcyan;
+    border-radius: 5px;
+    width: fit-content;
+    margin: auto;
+    box-shadow: 10 10 5 0 black;
+}
+
+#Hallway {
+    background-color: tan;
+    width: 98px;
+    height: 22px;
+}
