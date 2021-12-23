@@ -1,53 +1,44 @@
 let canvas = document.querySelector('canvas')
 let ctx= canvas.getContext('2d');
-ctx.font = '45px Times New Roman';
-ctx.fillText("Cookie Crumble", 415,200);
 
-//variables that I will need throughout the game 
-let score;
-let highscore;
-let player;
-let obstacles;
-let enemy;
-let gameSpeed;
-let keys = [];
+const goRight = document.getElementById('right');
+const jump = document.getElementById('space')
 
-ctx.beginPath();
-ctx.fillStyle = 'yellow'
-ctx.fillRect(400,450,50,50); 
-ctx.stroke();
-
-ctx.beginPath();
-ctx.fillStyle = 'blue';
-ctx.fillRect(10,400,80,100);
-ctx.stroke();
-
-let dx = 2 
-let dy = -2
-let x = 25
-let y = 25
-
-ctx.fillStyle = 'yellow';
-
-function draw(); {
-    ctx.clearRect(0,0, canvas.width, canvas.height);
-    ctx.fillRect(x,y,50,50)
-
-    if( x + dx > canvas.width-1 || x + dx < 0){
-        dx = -dx;
-    } 
-    if(y + dy > canvas.height -1 || y + dy < 0){
-        dy = -dy;
-    }
-    x += dx;
-    y += dy;
+// intro to the game - will add a font that looks like cookies and an affect that makes the cookies crumble when scrolled over (stretch goal?)
+// instructions to read before the game and a start game button (html?)
+function drawBackGround(){
+ctx.fillStyle = 'tan';
+ctx.fillRect (0,500,1100,500);
+ctx.fillStyle = 'silver';
+ctx.fillRect (0,0,1100,500)
 }
-setInterval(draw, 30);
 
-   // cookieCount = 0
-//canvas.addEventListener('keypress' ,function(){
+// setting up the area/shape for the child (main character block)
 
+let childX = 400
+let childY = 450
 
+function draw(){
+    ctx.clearRect(0,0,canvas.width, canvas.height)
+    drawBackGround()
+    drawChild()
+    window.requestAnimationFrame(draw)
+}
 
+const drawChild = () => {
+    ctx.fillStyle = 'yellow' 
+    ctx.fillRect (childX,childY,50,50); 
+    ctx.stroke();
+    }
+let number = 300
+draw() 
+function moveChild (e) {
+    childY += -10
+    number++;
+    console.log(e)
 
+    //e.key
+}
+window.requestAnimationFrame(moveChild)
+addEventListener('keyup' , moveChild)
 
