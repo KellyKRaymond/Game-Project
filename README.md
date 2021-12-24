@@ -27,6 +27,7 @@ Resources utilized: Class notes, classmates, office hours, Eric and Chelsea - as
 
 Biggest challenge for me was every time I added something and didn't have it complete or wasn't 100% correct - EVERYTHING would disappear off my canvas and I would be left with the 
 blue frame around my box - I couldn't even visualize or pint point what I was messing with. ~~~ i had an extra } at the end of my code which was why it was doing this.
+easiest part for me was coming up with (too many) ideas and getting ahead of myself with graphics and planning - not realizing how many functions go into each detail. 
 
 //variables that I will need throughout the game 
 // let intro;
