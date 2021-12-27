@@ -43,9 +43,9 @@ function jumpUp(){
     if(childJump && childY >= 250){
         childY -= 5
     }if (childY === 250){
-            childY += 5 && childY <= 450
-            childJump = false
-    }
+         childY = 450
+         childJump = false
+}
 }
 let enemyX = 400
 let enemyY = 100
