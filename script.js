@@ -10,9 +10,6 @@ ctx.fillRect (0,500,1100,500);
 ctx.fillStyle = 'silver';
 ctx.fillRect (0,0,1100,500)
 }
-// const theObstacles = obstacles
-// ctx.fillStyle = 'black';
-// ctx.fillRect (0,0,900,500)
 
 // setting up the area/shape for the child (main character block)
 let childX = 400
@@ -22,9 +19,10 @@ let childJump = false
 function draw(){
     ctx.clearRect(0,0,canvas.width, canvas.height)
     drawBackGround()
+    drawEnemy()
     drawChild()
+    drawObstacles()
     jumpUp()
-    // drawEnemy()
     window.requestAnimationFrame(draw)
 }
 const drawChild = () => {
@@ -33,6 +31,16 @@ const drawChild = () => {
     ctx.stroke();
 }
 
+const drawEnemy = () => {
+    ctx.fillStyle = 'purple'
+    ctx.fillRect (100, 370, 60, 130);
+    ctx.stroke();
+}
+const drawObstacles = () => {
+    ctx.fillStyle = 'black';
+    ctx.fillRect (1000,450,50,50)
+    ctx.stroke();
+}
 draw() // this tells the code when a spacebar (key 32) is pressed to move up that many pixles
 function moveChild (e) {
     if(e.keyCode === 32){
@@ -47,13 +55,9 @@ function jumpUp(){
          childJump = false
 }
 }
-let enemyX = 400
-let enemyY = 100
+// let enemyX = 400
+// let enemyY = 100
 
-const drawEnemy = () => {
-    ctx.fillStyle = 'purple'
-    ctx.fillRect (enemyX, enemyY, 80,70);
-    ctx.stroke();
-}
+
 window.requestAnimationFrame(draw)
 addEventListener('keyup' , moveChild)
