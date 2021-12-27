@@ -1,37 +1,40 @@
 let canvas = document.querySelector('canvas')
 let ctx= canvas.getContext('2d');
 const goRight = document.getElementById('right');
-// const jump = document.getElementById('space')
+
 // intro to the game - will add a font that looks like cookies and an affect that makes the cookies crumble when scrolled over (stretch goal?)
-// instructions to read before the game and a start game button (html?)
+
 function drawBackGround(){
 ctx.fillStyle = 'tan';
 ctx.fillRect (0,500,1100,500);
 ctx.fillStyle = 'silver';
 ctx.fillRect (0,0,1100,500)
 }
+// const theObstacles = obstacles
+// ctx.fillStyle = 'black';
+// ctx.fillRect (0,0,900,500)
+
 // setting up the area/shape for the child (main character block)
 let childX = 400
 let childY = 450
 let childJump = false
-let gravity = 0.9
-let comeDown = false
+
 function draw(){
     ctx.clearRect(0,0,canvas.width, canvas.height)
     drawBackGround()
     drawChild()
     jumpUp()
+    // drawEnemy()
     window.requestAnimationFrame(draw)
 }
 const drawChild = () => {
     ctx.fillStyle = 'yellow'
     ctx.fillRect (childX,childY,50,50); 
     ctx.stroke();
-    }
-let number = 300
-draw() 
+}
+
+draw() // this tells the code when a spacebar (key 32) is pressed to move up that many pixles
 function moveChild (e) {
-    console.log(e)
     if(e.keyCode === 32){
         childJump = true
     }
@@ -39,11 +42,18 @@ function moveChild (e) {
 function jumpUp(){
     if(childJump && childY >= 250){
         childY -= 5
-    }
-    else{
-        childJump = false
+    }if (childY === 250){
+            childY += 5 && childY <= 450
+            childJump = false
     }
 }
+let enemyX = 400
+let enemyY = 100
 
+const drawEnemy = () => {
+    ctx.fillStyle = 'purple'
+    ctx.fillRect (enemyX, enemyY, 80,70);
+    ctx.stroke();
+}
 window.requestAnimationFrame(draw)
 addEventListener('keyup' , moveChild)
