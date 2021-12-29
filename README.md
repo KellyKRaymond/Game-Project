@@ -17,5 +17,5 @@ Biggest challenge for me was every time I added something and didn't have it com
 blue frame around my box - I couldn't even visualize or pint point what I was messing with. ~~~ i had an extra } at the end of my code which was why it was doing this.
 easiest part for me was coming up with (too many) ideas and getting ahead of myself with graphics and planning - not realizing how many functions go into each detail. 
 
-- Things that became easier, checking my console on my web browser to see what the error codes were 
+- Things that became easier, checking my console on my web browser to see what the error codes were, pushing my updates to gitHub so they were saved 
 
