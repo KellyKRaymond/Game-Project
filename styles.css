@@ -1,0 +1,11 @@
+.Menu {
+    display: flex;
+    align-items: center;
+    color:darkcyan
+
+}
+.Menu-Container {
+    border: 2px blue;
+    background-color: chartreuse;
+
+}

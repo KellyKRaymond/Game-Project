@@ -1,5 +1,25 @@
-let canvas = document.querySelector('canvas')
+let cookieImage = new Image();
+cookieImage.src = 'Usethiscookie.png' // Image from http://clipart-library.com/free/cartoon-cookie-png.html
+let obstacleImage = new Image();
+obstacleImage.src ='Usethistonka.png' // Image from https://www.pngkey.com/maxpic/u2w7o0u2r5e6o0e6/ 
+let cookieJarImage = new Image();
+cookieJarImage.src = 'Usethisjar.png'// Image from https://clipart.world/jar-clipart/cookies-jar-clipart-transparent/
+let childSpriteImage = new Image ();
+childSpriteImage.src ='Boyjump.png' // Image Abe helped edit into a file making it easier to create a sprite
+
+let canvas = document.querySelector('canvas');
 let ctx= canvas.getContext('2d');
+
+let spritesheet;
+childSpriteImage.addEventListener('load',() => {
+   // box.Image = childSpriteImage
+} )
+
+// let isGamePaused = true;
+// const startGameButton = document.querySelector('.start-game');
+// startGameButton.addEventListener('click', () => {
+//     isGamePaused = false;
+// })
 
 // intro to the game - will add a font that looks like cookies and an affect that makes the cookies crumble when scrolled over (stretch goal?)
 function drawBackGround(){
@@ -7,6 +27,7 @@ ctx.fillStyle = 'tan';
 ctx.fillRect (0,500,1100,500);
 ctx.fillStyle = 'silver';
 ctx.fillRect (0,0,1100,500)
+
 }
 
 // setting up the area/shape for the child (main character block)
@@ -14,25 +35,52 @@ let childX = 400
 let childY = 450
 let childJump = false
 
+let cookieCount = 0
+
+
 function draw(){
     ctx.clearRect(0,0,canvas.width, canvas.height)
     drawBackGround()
     drawEnemy()
     drawChild()
     jumpUp()
+    drawCookieJar()
     obstacleArray.forEach(ob => {
         ob.draw()
         if(isColliding({x:childX,y:childY,height:50,width:50},ob)){
             console.log("Collided")
         }
     })
-    cookieArray.forEach(object => {
+    cookieArray.forEach((object, i) => {
         object.draw()
         if(isColliding({x:childX,y:childY,height:50,width:50},object)){
-        } console.log("eatthecookie")
-    })
+        cookieCount ++ 
+        cookieArray.splice(i,1)
+        console.log(cookieCount)
+
+    }
+})
     window.requestAnimationFrame(draw)
 }
+
+
+function animate (){
+    ctx.drawImage (
+        spritesheet,
+        0,
+        0,
+        770,
+        423,
+    )
+}
+
+
+
+
+
+
+
+
 
 const drawChild = () => {
     ctx.fillStyle = 'yellow'
@@ -44,6 +92,11 @@ const drawEnemy = () => {
     ctx.fillRect (100, 370, 60, 130);
     ctx.stroke();
 }
+const drawCookieJar = () => {
+    let jarX = 1000
+    let jarY = 10
+    ctx.drawImage(cookieJarImage, jarX, jarY, 80, 100);
+}
 const obstacleArray = []
 class Obstacle {
     constructor(x,y,width,height){
@@ -54,40 +107,36 @@ class Obstacle {
     }
     draw(){
         this.x -= 3
-        ctx.fillStyle = 'black';
-        ctx.fillRect (this.x,this.y,this.width,this.height)
+        ctx.drawImage(obstacleImage, this.x, this.y, this.width, this.height)
     }
 }
 for(let i = 0; i < 35; i++){
-    const randomNum = Math.floor(Math.random() * 17000)
-    const obstacle1 = new Obstacle(1000 + randomNum,450,50,50)
+    const randomNum = Math.floor(Math.random() * 7000)
+    const obstacle1 = new Obstacle(1000 + randomNum,450,70,55)
     obstacleArray.push(obstacle1)
 }
 const cookieArray = []
 class PowerUp {
-    constructor(cookieX,cookieY,width,height){
-        this.cookieX = cookieX
-        this.cookieY = cookieY
+    constructor(x,y,width,height){
+        this.x = x
+        this.y = y
         this.width = width
         this.height = height
     }
 
     draw(){
-        this.cookiex -= 14
-        ctx.beginPath();
-        ctx.arc(1000, 275, 15, 0, 2 * Math.PI);
-        ctx.fillStyle = 'brown'
-        ctx.fillStyle = (this.cookieX,this.cookieY,this.width,this.height);
-        ctx.closePath();
+        this.x -= 1
+        ctx.drawImage(cookieImage, this.x,this.y, this.width, this.height)
     }
 }
-for(let i = 0; i < 10; i++){
-    const randomNum1 = Math.floor(Math.random() * 200)
-    const randomNum2 = Math.floor(Math.random() * 400)
-    const cookie1 = new PowerUp(randomNum1 + randomNum2, Math.random() * 1000 + 100, 150,150) 
+for(let i = 0; i < 25; i++){
+    const maximum = 2750
+    const minimum = 250
+    let randomnumber = Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
+    const cookie1 = new PowerUp(randomnumber, Math.random() * 300 + 45 , 30, 30) 
     cookieArray.push(cookie1)
 }
-
+//
 draw() // this tells the code when a spacebar (key 32) is pressed to move up that many pixles
 function moveChild (e) {
     if(e.keyCode === 32){

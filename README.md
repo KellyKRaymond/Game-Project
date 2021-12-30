@@ -6,6 +6,8 @@ I created my folder and files inside my folder linking them so they could all wo
 
 explain side scroller vs platformer view of the screen 
 
+to get the background of the image to be transparent I used ~ https://www6.lunapic.com
+
 What is HTML Canvas? (definition from W3Schools)
 The HTML <canvas> element is used to draw graphics, on the fly, via JavaScript.
 The <canvas> element is only a container for graphics. You must use JavaScript to actually draw the graphics.
