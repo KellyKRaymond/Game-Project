@@ -15,7 +15,7 @@ childSpriteImage.addEventListener('load',() => {
    // box.Image = childSpriteImage
 } )
 
-// starting the game when the button is clicked - starts making the objects move
+// starting the game when the button is clicked - starts making the objects move & it's moving the menu off of the screen
 let isGamePaused = true;
 let hiddenMenu = false;
 const startGameButton = document.querySelector('.start-game');
@@ -38,7 +38,12 @@ let childX = 400
 let childY = 450
 let childJump = false
 
+let enemyX = 10
+let enemyY = 370
+
 let cookieCount = 0
+
+// when the cookies collid with the child += 1 to the 'cookie count' 
 
 function draw(){
     ctx.clearRect(0,0,canvas.width, canvas.height)
@@ -50,25 +55,30 @@ function draw(){
     drawEnemy()
     drawChild()
     jumpUp()
+    drawCookieCount()
     drawCookieJar()
+
+    if(isCollidingObject({x:childX,y:childY,height:50,width:50},{x:enemyX, y:enemyY, height:60, width:130})){
+        console.log('endgame')
+    }
     obstacleArray.forEach(ob => {
         ob.draw()
-        if(isColliding({x:childX,y:childY,height:50,width:50},ob)){
+        if(isCollidingObject({x:childX,y:childY,height:50,width:50},ob)){
             console.log("Collided")
         }
     })
     cookieArray.forEach((object, i) => {
         object.draw()
-        if(isColliding({x:childX,y:childY,height:50,width:50},object)){
+        if(isCollidingObject({x:childX,y:childY,height:50,width:50},object)){
         cookieCount ++ 
         cookieArray.splice(i,1)
         console.log(cookieCount)
 
-    }
+    } 
 })
+
     window.requestAnimationFrame(draw)
 }
-
 function animate (){
     ctx.drawImage (
         spritesheet,
@@ -84,14 +94,18 @@ const drawChild = () => {
     ctx.stroke();
 }
 const drawEnemy = () => {
+    enemyX += 1
     ctx.fillStyle = 'purple'
-    ctx.fillRect (100, 370, 60, 130);
+    ctx.fillRect (enemyX, enemyY, 60, 130);
     ctx.stroke();
 }
 const drawCookieJar = () => {
     let jarX = 1000
     let jarY = 10
     ctx.drawImage(cookieJarImage, jarX, jarY, 80, 100);
+}
+const drawCookieCount = () => {
+// add inner text on JS not CSS
 }
 const obstacleArray = []
 class Obstacle {
@@ -148,12 +162,11 @@ function jumpUp(){
         childY += 5
     }
 }
-function isColliding(obj1, obj2) {
+function isCollidingObject(obj1, obj2) {
     return obj1.x < obj2.x + obj2.width &&
     obj1.x + obj1.width > obj2.x &&
     obj1.y < obj2.y + obj2.height &&
     obj1.height + obj1.y > obj2.y;
 }
-
 window.requestAnimationFrame(draw)
 addEventListener('keyup' , moveChild)
