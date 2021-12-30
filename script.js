@@ -24,8 +24,9 @@ startGameButton.addEventListener('click', () => {
     isGamePaused = false;
     hiddenMenu = true;
     document.body.removeChild(menu)
-   
 })
+
+
 // intro to the game - will add a font that looks like cookies and an affect that makes the cookies crumble when scrolled over (stretch goal?)
 function drawBackGround(){
 ctx.fillStyle = 'tan';
@@ -36,11 +37,18 @@ ctx.fillRect (0,0,1100,500)
 // setting up the area/shape for the child (main character block)
 let childX = 400
 let childY = 450
+
+const child  = {
+    x: 400,
+    y: 450,
+    width: 50, 
+    height: 50, 
+}
 let childJump = false
 
 let enemyX = 10
 let enemyY = 370
-
+//same for enemy child. width/height,etc
 let cookieCount = 0
 
 // when the cookies collid with the child += 1 to the 'cookie count' 
@@ -58,8 +66,11 @@ function draw(){
     drawCookieCount()
     drawCookieJar()
 
-    if(isCollidingObject({x:childX,y:childY,height:50,width:50},{x:enemyX, y:enemyY, height:60, width:130})){
+    if(isCollidingObject({x:childX,y:childY,height:50,width:50},{x:enemyX, y:enemyY, height:130, width:60})){
+        isGamePaused = true
         console.log('endgame')
+        document.body.appendChild(endGame)
+
     }
     obstacleArray.forEach(ob => {
         ob.draw()
@@ -94,7 +105,7 @@ const drawChild = () => {
     ctx.stroke();
 }
 const drawEnemy = () => {
-    enemyX += 1
+    enemyX += .1
     ctx.fillStyle = 'purple'
     ctx.fillRect (enemyX, enemyY, 60, 130);
     ctx.stroke();
