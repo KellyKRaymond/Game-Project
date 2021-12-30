@@ -15,21 +15,24 @@ childSpriteImage.addEventListener('load',() => {
    // box.Image = childSpriteImage
 } )
 
-// let isGamePaused = true;
-// const startGameButton = document.querySelector('.start-game');
-// startGameButton.addEventListener('click', () => {
-//     isGamePaused = false;
-// })
-
+// starting the game when the button is clicked - starts making the objects move
+let isGamePaused = true;
+let hiddenMenu = false;
+const startGameButton = document.querySelector('.start-game');
+const menu = document.querySelector('.menu');
+startGameButton.addEventListener('click', () => {
+    isGamePaused = false;
+    hiddenMenu = true;
+    document.body.removeChild(menu)
+   
+})
 // intro to the game - will add a font that looks like cookies and an affect that makes the cookies crumble when scrolled over (stretch goal?)
 function drawBackGround(){
 ctx.fillStyle = 'tan';
 ctx.fillRect (0,500,1100,500);
 ctx.fillStyle = 'silver';
 ctx.fillRect (0,0,1100,500)
-
 }
-
 // setting up the area/shape for the child (main character block)
 let childX = 400
 let childY = 450
@@ -37,10 +40,13 @@ let childJump = false
 
 let cookieCount = 0
 
-
 function draw(){
     ctx.clearRect(0,0,canvas.width, canvas.height)
     drawBackGround()
+    if (isGamePaused){
+        window.requestAnimationFrame(draw) 
+        return
+    }
     drawEnemy()
     drawChild()
     jumpUp()
@@ -63,7 +69,6 @@ function draw(){
     window.requestAnimationFrame(draw)
 }
 
-
 function animate (){
     ctx.drawImage (
         spritesheet,
@@ -73,15 +78,6 @@ function animate (){
         423,
     )
 }
-
-
-
-
-
-
-
-
-
 const drawChild = () => {
     ctx.fillStyle = 'yellow'
     ctx.fillRect (childX,childY,50,50); 
@@ -114,7 +110,8 @@ for(let i = 0; i < 35; i++){
     const randomNum = Math.floor(Math.random() * 7000)
     const obstacle1 = new Obstacle(1000 + randomNum,450,70,55)
     obstacleArray.push(obstacle1)
-}
+    }
+
 const cookieArray = []
 class PowerUp {
     constructor(x,y,width,height){
@@ -123,7 +120,6 @@ class PowerUp {
         this.width = width
         this.height = height
     }
-
     draw(){
         this.x -= 1
         ctx.drawImage(cookieImage, this.x,this.y, this.width, this.height)
@@ -133,7 +129,7 @@ for(let i = 0; i < 25; i++){
     const maximum = 2750
     const minimum = 250
     let randomnumber = Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
-    const cookie1 = new PowerUp(randomnumber, Math.random() * 300 + 45 , 30, 30) 
+    const cookie1 = new PowerUp(1000 + randomnumber, Math.random() * 300 + 45 , 30, 30) 
     cookieArray.push(cookie1)
 }
 //

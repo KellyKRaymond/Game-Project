@@ -1,8 +1,15 @@
-.Menu {
+body {
+    position: relative;
+}
+
+.menu {
     display: flex;
     align-items: center;
-    color:darkcyan
-
+    color:darkcyan;
+    top: 300px;
+    left: 550px;
+    transform: translate(-50%, -50%);
+    position: absolute;
 }
 .Menu-Container {
     border: 2px blue;
