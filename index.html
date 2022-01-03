@@ -9,16 +9,23 @@
 </head>
 <body>
     
-    <canvas id="myCanvas" width="1100" height="600" style="border: 2px solid blue;"></canvas>
+    <canvas id="myCanvas" width="1100" height="600" style="border: 3px solid darkcyan;"></canvas>
     <div class= "menu">
         <div class="Instructions"></div>
         <p> The object of this game is you are a child running away from your mom. 
             <br>she is trying to put you to bed & you want to stay up and eat cookies!
-            <br><b> controls: space key to jump over obstacles & collect as many cookies as possible! </b> 
+            <br><b> controls: space key to jump over obstacles & collect as many cookies as  
+                <br> possible before mom catches you! </b> 
         </p>
         <button class= 'start-game'><b>Start Game</b></button>
-        <div class= "endGame"></div>
     </div>
+    <div class= "endGame menu hidden">
+        <h1>Game Over</h1>
+        <button class = 'restart-game'>Restart</button>
+        <p class="Cookie-Count"></p>
+    </div>
+    
+     
 
 <source><script src="script.js"></script>
 </body>
