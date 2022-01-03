@@ -9,10 +9,9 @@ childSpriteImage.src ='Boyjump.png' // Image from https://www.gameart2d.com/the-
                                     //Abe helped edit into a file making it easier to create a sprite
 let canvas = document.querySelector('canvas');
 let ctx= canvas.getContext('2d');
-let spritesheet;
-childSpriteImage.addEventListener('load',() => {
-   // box.Image = childSpriteImage
-} )
+// childSpriteImage.addEventListener('load',() => {
+//    box.Image = childSpriteImage;
+//} )
 // starting the game when the button is clicked - starts making the objects move & it's moving the menu off of the screen
 let isGamePaused = true;
 let hiddenMenu = false;
@@ -24,13 +23,12 @@ startGameButton.addEventListener('click', () => {
     //document.body.removeChild(menu)
     menu.classList.add('hidden')
 })
+
 const restartGameButton = document.querySelector('.restart-game');
-const endMenu = document.querySelector('.menu');
+//const endMenu = document.querySelector('.menu');
 restartGameButton.addEventListener('click', () => {
-    isGamePaused = false;
-    hiddenMenu = true;
-    menu.classList.add('hidden')
-})
+    location.reload()    
+    })
 // intro to the game - will add a font that looks like cookies and an affect that makes the cookies crumble when scrolled over (stretch goal?)
 function drawBackGround(){
 ctx.fillStyle = 'tan';
@@ -69,7 +67,6 @@ function draw(){
     obstacleArray.forEach(ob => {
         ob.draw()
         if(isCollidingObject({x:childX,y:childY,height:50,width:50},ob)){
-            console.log("Collided")
         }
     })
     cookieArray.forEach((object, i) => {
@@ -150,14 +147,13 @@ function moveChild (e) {
     }
 }
 function jumpUp(){
-    if(childJump && childY > 250){
+    if(childJump && childY > 200){
         childY -= 5
-    }else if (childJump && childY === 250){
+    }else if (childJump && childY === 200){
          childJump = false
-    }else if(!childJump && childY >= 250 && childY !== 450 ){
+    }else if(!childJump && childY >= 200 && childY !== 450 ){
         childY += 5
     }
-    
 }
 function isCollidingObject(obj1, obj2) {
     return obj1.x < obj2.x + obj2.width &&
@@ -165,6 +161,24 @@ function isCollidingObject(obj1, obj2) {
     obj1.y < obj2.y + obj2.height &&
     obj1.height + obj1.y > obj2.y;
 }
+// function animate(){
+//     ctx.clearRect(0,0,canvas.width,canvas.height)
+//     requestAnimationFrame(animate)
+
+//     currentFrame = currentFrame % totalFrames;
+//     srcX = currentFrame * childSpriteImageWidth
+
+//     letFrameX = 154 * currentFrame
+
+//     ctx.drawImage(childSpriteImage, frameX, 0, 154, 154, this.x, this.y, this.height, this.width);
+
+//     framesDrawn++;
+//     if(framesDrawn >= 10) {
+//      currentFrame++;
+//      framesDrawn = 0;
+//     }
+// }
 
 window.requestAnimationFrame(draw)
 addEventListener('keyup' , moveChild)
+
