@@ -102,13 +102,16 @@ const drawChild = () => {
 }
 let enemyCurrentFrame = 0
 const drawEnemy = () => {
-    enemyCurrentFrame += .1
+    enemyCurrentFrame += .05
+    enemyX += .1
     if(enemyCurrentFrame >= 6){
         enemyCurrentFrame = 0 
     }
-    let frameX = Math.floor(enemyCurrentFrame % 6) * 100
+    let frameX = Math.floor(enemyCurrentFrame % 6) * 96
+    console.log(frameX)
     let frameY = Math.floor(enemyCurrentFrame / 6) 
-    ctx.drawImage(enemySpriteImage,frameX,frameY,99.5,1,enemyX,enemyY,100,100)
+    
+    ctx.drawImage(enemySpriteImage,frameX,0,100,199,enemyX,enemyY,100,200)
 }
 
 //the coordinates for the cookie jar in the top right corner - since it isn't moving I could just put the exact location in
